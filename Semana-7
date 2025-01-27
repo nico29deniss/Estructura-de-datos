@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static bool VerificarBalance(string expresion)
+    {
+        Stack<char> pila = new Stack<char>();
+
+        foreach (char c in expresion)
+        {
+            if (c == '(' || c == '{' || c == '[')
+            {
+                pila.Push(c);
+            }
+            else if (c == ')' || c == '}' || c == ']')
+            {
+                if (pila.Count == 0) return false;
+                char top = pila.Pop();
+                if (!EsBalanceado(top, c)) return false;
+            }
+        }
+
+        return pila.Count == 0;
+    }
+
+    static bool EsBalanceado(char apertura, char cierre)
+    {
+        return (apertura == '(' && cierre == ')') ||
+               (apertura == '{' && cierre == '}') ||
+               (apertura == '[' && cierre == ']');
+    }
+
+    static void Main()
+    {
+        string formula = "{7+(8*5)-[(9-7)+(4+1)]}";
+
+        if (VerificarBalance(formula))
+        {
+            Console.WriteLine("Fórmula balanceada.");
+        }
+        else
+        {
+            Console.WriteLine("Fórmula no balanceada.");
+        }
+    }
+}
