@@ -1,0 +1,72 @@
+
+using System;
+using System.Collections.Generic;
+
+class Persona
+{
+    public string Nombre { get; set; }
+    public int Asiento { get; set; }
+
+    public Persona(string nombre, int asiento)
+    {
+        Nombre = nombre;
+        Asiento = asiento;
+    }
+}
+
+class Atraccion
+{
+    private Queue<string> colaEspera = new Queue<string>();
+    private List<Persona> asientos = new List<Persona>();
+    private const int capacidad = 30;
+
+    public void AgregarPersona(string nombre)
+    {
+        if (asientos.Count < capacidad)
+        {
+            int asientoAsignado = asientos.Count + 1;
+            asientos.Add(new Persona(nombre, asientoAsignado));
+            Console.WriteLine($"{nombre} ha recibido el asiento #{asientoAsignado}");
+        }
+        else
+        {
+            colaEspera.Enqueue(nombre);
+            Console.WriteLine($"{nombre} ha sido agregado a la cola de espera.");
+        }
+    }
+
+    public void MostrarAsientos()
+    {
+        Console.WriteLine("\nLista de asientos ocupados:");
+        foreach (var persona in asientos)
+        {
+            Console.WriteLine($"Asiento {persona.Asiento}: {persona.Nombre}");
+        }
+    }
+
+    public void MostrarColaEspera()
+    {
+        Console.WriteLine("\nPersonas en espera:");
+        foreach (var persona in colaEspera)
+        {
+            Console.WriteLine(persona);
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Atraccion atraccion = new Atraccion();
+
+        // Simulación de llegada de personas
+        for (int i = 1; i <= 35; i++)
+        {
+            atraccion.AgregarPersona("Persona" + i);
+        }
+
+        atraccion.MostrarAsientos();
+        atraccion.MostrarColaEspera();
+    }
+}
