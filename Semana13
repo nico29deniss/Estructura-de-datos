@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> catalogo = new List<string>
+        {
+            "National Geographic",
+            "Time",
+            "Forbes",
+            "Scientific American",
+            "The Economist",
+            "Nature",
+            "Popular Science",
+            "New Yorker",
+            "Vogue",
+            "Harvard Business Review"
+        };
+
+        while (true)
+        {
+            Console.WriteLine("\nMenú:");
+            Console.WriteLine("1. Buscar un título");
+            Console.WriteLine("2. Salir");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine();
+
+            if (opcion == "1")
+            {
+                Console.Write("Ingrese el título a buscar: ");
+                string tituloBuscado = Console.ReadLine();
+                
+                if (catalogo.Contains(tituloBuscado))
+                {
+                    Console.WriteLine("Encontrado");
+                }
+                else
+                {
+                    Console.WriteLine("No encontrado");
+                }
+            }
+            else if (opcion == "2")
+            {
+                Console.WriteLine("Saliendo del programa...");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
+}
